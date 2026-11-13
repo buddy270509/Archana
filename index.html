@@ -114,6 +114,28 @@ input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
 .trail svg:nth-child(odd){transform:rotate(-12deg)}
 .top{margin-top:6px;border:0;background:#ffffffb3;border-radius:99px;padding:10px 20px;font-weight:800;color:var(--blue);cursor:pointer;text-decoration:none}
 
+
+.b-cake{background:#ffe3ee}
+.b-gal{background:var(--sky2)}
+.cakebtn{border:0;background:none;padding:0;cursor:pointer;width:min(84vw,330px);-webkit-tap-highlight-color:transparent}
+.cakebtn>svg{width:100%;height:auto;display:block;overflow:visible}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .5s ease-in-out infinite alternate;transition:transform .35s ease-in,opacity .3s}
+.flame.f2{animation-delay:.12s}.flame.f3{animation-delay:.24s}
+@keyframes flick{0%{transform:scale(1,1) rotate(-3deg)}100%{transform:scale(.92,1.14) rotate(3deg)}}
+.glow{animation:glow 1.2s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.35}to{opacity:.7}}
+.cakebtn.out .flame{opacity:0;transform:scale(0);animation:none}
+.cakebtn.out .glow{opacity:0;animation:none}
+.smoke circle{opacity:0;transform-box:fill-box;transform-origin:center}
+.cakebtn.out .smoke circle{animation:smoke 1.8s ease-out forwards;animation-delay:var(--d,0s)}
+@keyframes smoke{0%{opacity:.7;transform:translateY(0) scale(.6)}100%{opacity:0;transform:translateY(-52px) scale(2.2)}}
+.wishmsg{font-family:var(--display);font-weight:600;font-size:1.35rem;min-height:2.6em;color:var(--blue);text-wrap:balance}
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;width:100%}
+.pol{background:#fff;padding:10px 10px 12px;border-radius:6px;box-shadow:0 8px 0 #00000012;transform:rotate(var(--r,0deg))}
+.pol img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:3px;background:#eef3f9}
+.pol figcaption{font-family:var(--display);font-weight:500;font-size:.95rem;text-align:center;margin-top:8px;color:var(--blue)}
+@media (max-width:360px){.gal{grid-template-columns:1fr}}
+
 /* paw burst */
 .paw{position:fixed;z-index:60;width:26px;height:26px;margin:-13px 0 0 -13px;pointer-events:none;color:var(--c,#e07aa0);animation:fly 1.1s ease-out forwards}
 @keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.5);opacity:0}}
@@ -129,6 +151,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="paw" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="16.5" rx="6.2" ry="5"/><ellipse cx="4.8" cy="10.5" rx="2.5" ry="3.3"/><ellipse cx="9.4" cy="6" rx="2.5" ry="3.5"/><ellipse cx="14.6" cy="6" rx="2.5" ry="3.5"/><ellipse cx="19.2" cy="10.5" rx="2.5" ry="3.3"/></g></symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z"/></symbol>
     <symbol id="bone" viewBox="0 0 40 20"><g fill="currentColor"><rect x="8" y="5" width="24" height="10" rx="5"/><circle cx="8" cy="5.5" r="4.5"/><circle cx="8" cy="14.5" r="4.5"/><circle cx="32" cy="5.5" r="4.5"/><circle cx="32" cy="14.5" r="4.5"/></g></symbol>
     <symbol id="pup" viewBox="0 0 120 110">
       <ellipse cx="22" cy="52" rx="15" ry="30" transform="rotate(16 22 52)" fill="var(--e,#d9a873)"/>
@@ -182,45 +205,84 @@ input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
 
 <section class="band b-msg" id="wish" aria-label="Birthday wishes">
   <div class="wrap">
-    <div class="dogrow" aria-hidden="true">
-      <svg viewBox="0 0 120 110" style="--f:#f3d3a6;--e:#d9a873;--p:#e9bf8b"><use href="#pup"/></svg>
-      <svg viewBox="0 0 120 110" style="--f:#fff6e6;--e:#c9b8a6;--p:#e8ddd0"><use href="#pup"/></svg>
-      <svg viewBox="0 0 120 110" style="--f:#e9e4ff;--e:#b9acec;--p:#d3caf7"><use href="#pup"/></svg>
-    </div>
     <div class="card reveal">
       <span class="pill">10 December · 5:03 AM</span>
       <h2>Happy Birthday!</h2>
-      <p>Wishing you a day full of treats, puppy cuddles and everything you love.</p>
+      <p>Wishing you a day full of treats, laughter and everything you love.</p>
       <p>You were born at 5:03 in the morning, which makes you an early bird, just like a puppy who wants breakfast at sunrise. 🐶</p>
       <p>May this year be as playful and happy as a puppy that just found its favourite ball.</p>
     </div>
   </div>
 </section>
 
-<section class="band b-jar" aria-label="Treat jar of wishes">
+<section class="band b-cake" aria-label="Birthday cake">
   <div class="wrap">
-    <h2 class="big reveal">The treat jar</h2>
+    <h2 class="big reveal">Make a wish</h2>
+    <p class="small">Close your eyes, then tap the cake to blow out the candles.</p>
+    <button class="cakebtn reveal" id="cake" type="button" aria-label="Birthday cake with candles. Tap to blow them out.">
+      <svg viewBox="0 0 300 270" aria-hidden="true">
+        <defs>
+          <radialGradient id="gF" cx=".5" cy=".7" r=".6"><stop offset="0" stop-color="#fff6a8"/><stop offset=".55" stop-color="#ffc83d"/><stop offset="1" stop-color="#ff9a4d"/></radialGradient>
+          <radialGradient id="gG"><stop offset="0" stop-color="#fff2a0" stop-opacity=".85"/><stop offset="1" stop-color="#fff2a0" stop-opacity="0"/></radialGradient>
+        </defs>
+        <ellipse cx="150" cy="254" rx="132" ry="12" fill="#00000012"/>
+        <ellipse cx="150" cy="246" rx="132" ry="14" fill="#ffffff"/>
+        <rect x="36" y="166" width="228" height="76" rx="20" fill="#e4dbff"/>
+        <path d="M36 186q12 18 25 0q12 18 25 0q12 18 25 0q12 18 25 0q12 18 25 0q12 18 25 0q12 18 25 0q12 18 25 0q12 18 18 4v-14H36z" fill="#fffdf8"/>
+        <circle cx="62" cy="214" r="4" fill="#ffd3e1"/><circle cx="104" cy="226" r="4" fill="#fff1b8"/><circle cx="196" cy="216" r="4" fill="#cdeedd"/><circle cx="238" cy="228" r="4" fill="#ffd3e1"/><circle cx="150" cy="232" r="4" fill="#fff1b8"/>
+        <text x="150" y="224" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="22" fill="#4a5bb5">Archana</text>
+        <rect x="76" y="112" width="148" height="60" rx="18" fill="#ffd3e1"/>
+        <path d="M76 130q12 18 24 0q12 18 24 0q12 18 24 0q12 18 24 0q12 18 24 0q12 18 28 4v-14H76z" fill="#fffdf8"/>
+        <g color="#ffffff"><svg x="138" y="142" width="24" height="24"><use href="#paw"/></svg></g>
+        <g class="glow" opacity=".6"><circle cx="100" cy="64" r="22" fill="url(#gG)"/><circle cx="125" cy="58" r="22" fill="url(#gG)"/><circle cx="150" cy="56" r="22" fill="url(#gG)"/><circle cx="175" cy="58" r="22" fill="url(#gG)"/><circle cx="200" cy="64" r="22" fill="url(#gG)"/></g>
+        <g>
+          <rect x="96" y="82" width="8" height="32" rx="3" fill="#b8c9ff"/><rect x="121" y="78" width="8" height="36" rx="3" fill="#ffc4d6"/><rect x="146" y="76" width="8" height="38" rx="3" fill="#fff1a8"/><rect x="171" y="78" width="8" height="36" rx="3" fill="#bfeedb"/><rect x="196" y="82" width="8" height="32" rx="3" fill="#d9ccff"/>
+          <path d="M96 90l8-4M96 98l8-4M96 106l8-4M121 86l8-4M121 94l8-4M121 102l8-4M146 84l8-4M146 92l8-4M146 100l8-4M171 86l8-4M171 94l8-4M171 102l8-4M196 90l8-4M196 98l8-4M196 106l8-4" stroke="#ffffffcc" stroke-width="2.4" stroke-linecap="round"/>
+        </g>
+        <g class="flame"><path d="M100 58C107 68 108 76 100 82C92 76 93 68 100 58z" fill="url(#gF)"/></g>
+        <g class="flame f2"><path d="M125 52C132 62 133 70 125 76C117 70 118 62 125 52z" fill="url(#gF)"/></g>
+        <g class="flame f3"><path d="M150 50C157 60 158 68 150 74C142 68 143 60 150 50z" fill="url(#gF)"/></g>
+        <g class="flame f2"><path d="M175 52C182 62 183 70 175 76C167 70 168 62 175 52z" fill="url(#gF)"/></g>
+        <g class="flame"><path d="M200 58C207 68 208 76 200 82C192 76 193 68 200 58z" fill="url(#gF)"/></g>
+        <g class="smoke"><circle cx="100" cy="66" r="6" fill="#cdd3e2" style="--d:0s"/><circle cx="125" cy="60" r="6" fill="#cdd3e2" style="--d:.15s"/><circle cx="150" cy="58" r="6" fill="#cdd3e2" style="--d:.3s"/><circle cx="175" cy="60" r="6" fill="#cdd3e2" style="--d:.1s"/><circle cx="200" cy="66" r="6" fill="#cdd3e2" style="--d:.25s"/></g>
+      </svg>
+    </button>
+    <p class="wishmsg" id="wishmsg" aria-live="polite">Make your wish, then blow!</p>
+  </div>
+</section>
+
+<section class="band b-jar" aria-label="Jar of wishes">
+  <div class="wrap">
+    <h2 class="big reveal">The wish jar</h2>
     <p class="small">Tap the jar for a birthday wish.</p>
-    <button class="jar reveal" id="jar" type="button" aria-label="Treat jar. Tap for a wish.">
+    <button class="jar reveal" id="jar" type="button" aria-label="Wish jar. Tap for a wish.">
       <svg viewBox="0 0 160 170" aria-hidden="true">
         <rect x="46" y="8" width="68" height="22" rx="9" fill="#9fc9f3"/>
         <path d="M40 30h80v16q22 10 22 40v50q0 24-24 24H42q-24 0-24-24V86q0-30 22-40z" fill="#ffffffb0" stroke="#a9c3dc" stroke-width="4"/>
-        <g color="#f3c38a"><svg x="36" y="104" width="46" height="23"><use href="#bone"/></svg></g>
-        <g color="#ffb3c8"><svg x="72" y="124" width="46" height="23" style="transform:rotate(-8deg)"><use href="#bone"/></svg></g>
-        <g color="#b8a6f0"><svg x="54" y="84" width="42" height="21"><use href="#bone"/></svg></g>
-        <g color="#9fdcc0"><svg x="84" y="98" width="40" height="20"><use href="#bone"/></svg></g>
-        <g color="#ffd77a"><svg x="30" y="130" width="40" height="20"><use href="#bone"/></svg></g>
+        <g color="#f3c38a"><svg x="36" y="108" width="30" height="30"><use href="#star"/></svg></g>
+        <g color="#ffb3c8"><svg x="74" y="122" width="34" height="34"><use href="#star"/></svg></g>
+        <g color="#b8a6f0"><svg x="56" y="92" width="28" height="28"><use href="#star"/></svg></g>
+        <g color="#9fdcc0"><svg x="96" y="100" width="28" height="28"><use href="#star"/></svg></g>
+        <g color="#ffd77a"><svg x="34" y="132" width="28" height="28"><use href="#paw"/></svg></g>
+        <g color="#9db4f0"><svg x="100" y="132" width="26" height="26"><use href="#paw"/></svg></g>
         <rect x="52" y="62" width="56" height="30" rx="9" fill="#fff1b8" opacity=".95"/>
-        <text x="80" y="83" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="19" fill="#4a5bb5">TREATS</text>
+        <text x="80" y="83" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="19" fill="#4a5bb5">WISHES</text>
       </svg>
     </button>
     <div class="treat" id="treat" aria-live="polite">Your first wish is waiting inside.</div>
   </div>
 </section>
 
-<section class="band b-form" aria-label="A few puppy questions">
+<section class="band b-gal" id="gallery" aria-label="Photos" hidden>
   <div class="wrap">
-    <h2 class="big reveal">A few puppy questions</h2>
+    <h2 class="big reveal">Smile, Archana!</h2>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<section class="band b-form" aria-label="A few questions">
+  <div class="wrap">
+    <h2 class="big reveal">A few questions</h2>
     <div class="card reveal">
       <form id="f" novalidate autocomplete="off">
         <p class="note">Nothing here is compulsory. Answer only what you feel like. Whatever you write is emailed to me.</p>
@@ -245,12 +307,11 @@ input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
 <footer class="band b-end">
   <div class="wrap end">
     <div class="dogrow" aria-hidden="true">
-      <svg viewBox="0 0 120 110" style="--f:#fff6e6;--e:#c9b8a6;--p:#e8ddd0"><use href="#pup"/></svg>
       <svg viewBox="0 0 120 110" style="--f:#f3d3a6;--e:#d9a873;--p:#e9bf8b"><use href="#pup"/></svg>
     </div>
     <p>Sorry if I ever made a mistake or caused you any trouble.</p>
     <p>Happy birthday once again, Archana!</p>
-    <div class="sign">Tejas (Bhondutara)</div>
+    <div class="sign">Tejas</div>
     <div class="trail" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#paw"/></svg><svg viewBox="0 0 24 24"><use href="#paw"/></svg><svg viewBox="0 0 24 24"><use href="#paw"/></svg><svg viewBox="0 0 24 24"><use href="#paw"/></svg><svg viewBox="0 0 24 24"><use href="#paw"/></svg></div>
     <a class="top" href="#top" id="top">Back to the top</a>
   </div>
@@ -322,14 +383,14 @@ $("#pupBtn").addEventListener("click",e=>{ const r=e.currentTarget.getBoundingCl
 /* ---------- treat jar wishes ---------- */
 (function(){
   const W=[
-    "May your year have more puppy cuddles than you can count.",
+    "May your year have more happy moments than you can count.",
     "Wishing you good days and even better naps.",
     "May every Monday feel like a walk in the park.",
     "Here's to wagging-tail kind of days.",
     "May your favourite snack always show up right when you want it.",
     "Wishing you laughs that last all year long.",
-    "May your phone gallery fill up with puppy pictures.",
-    "Fetching you the biggest birthday wish ever!"
+    "May your plans work out and your gallery fill up with good memories.",
+    "Sending you the biggest birthday wish ever!"
   ];
   let i=0; const box=$("#treat");
   $("#jar").addEventListener("click",e=>{
@@ -360,6 +421,36 @@ $("#pupBtn").addEventListener("click",e=>{ const r=e.currentTarget.getBoundingCl
     if(ok){ last=Date.now(); say("Sent! Woof woof! 🐾","good"); const r=btn.getBoundingClientRect(); pawBurst(r.left+r.width/2,r.top,22); woof(); }
     else say("That didn't go through. Please try again in a moment.","warn");
   });
+})();
+
+/* ---------- birthday cake ---------- */
+(function(){
+  const cake=$("#cake"), msg=$("#wishmsg"); let lit=true;
+  cake.addEventListener("click",()=>{
+    lit=!lit; cake.classList.toggle("out",!lit);
+    const r=cake.getBoundingClientRect();
+    if(!lit){ msg.textContent="Wish made! May it come true. 🐾"; pawBurst(r.left+r.width/2,r.top+r.height*.3,34); woof(); }
+    else{ msg.textContent="The candles are back. Make another wish!"; }
+  });
+})();
+
+/* ---------- photos: add entries here, e.g. {src:"photos/archana1.jpg", caption:"Archana"} ---------- */
+const PHOTOS=[
+  {src:"photos/little.jpg",  caption:"Tiny Archana, big glasses"},
+  {src:"photos/flower.jpg",  caption:"Flower power"},
+  {src:"photos/shades.jpg",  caption:"That smile!"},
+  {src:"photos/orange.jpg",  caption:"Rock on"}
+];
+(function(){
+  if(!PHOTOS.length) return;
+  const g=$("#gal");
+  PHOTOS.forEach((p,i)=>{
+    const f=document.createElement("figure"); f.className="pol reveal"; f.style.setProperty("--r",(i%2?1.6:-1.6)+"deg");
+    const im=new Image(); im.src=p.src; im.alt=p.caption||"Archana"; im.loading="lazy"; f.append(im);
+    if(p.caption){ const c=document.createElement("figcaption"); c.textContent=p.caption; f.append(c); }
+    g.append(f);
+  });
+  $("#gallery").hidden=false;
 })();
 
 /* ---------- back to top + gentle entrance ---------- */
