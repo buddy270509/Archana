@@ -117,7 +117,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
 
 
 .b-cake{background:#ffe3ee}
-.b-gal{background:var(--sky2)}
+.b-gal{background:#a9c9ee radial-gradient(#ffffff40 1.5px,transparent 1.6px) 0 0/22px 22px}
+.pol .em{display:block;text-align:center;font-size:1.7rem;line-height:1;margin-top:6px;letter-spacing:.2em}
 .cakebtn{border:0;background:none;padding:0;cursor:pointer;width:min(84vw,330px);-webkit-tap-highlight-color:transparent}
 .cakebtn>svg{width:100%;height:auto;display:block;overflow:visible}
 .flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .5s ease-in-out infinite alternate;transition:transform .35s ease-in,opacity .3s}
@@ -255,7 +256,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
 <section class="band b-msg" id="wish" aria-label="Birthday wishes">
   <div class="wrap">
     <article class="letter reveal">
-      <p>Dear Archana,</p>
+      <p>Dear Archana (Matku),</p>
       <p>Happy birthday! 🎂</p>
       <p>Little Mole thinks, “May this year be joyful for you.”</p>
       <p>May this year be playful and happy for you, with lots of laughter, good food, good friends and all the little things that make you smile. May your days be bright, your worries stay small, and every wish you make come true.</p>
@@ -456,10 +457,10 @@ function pawBurst(x,y,n){
 
 /* ---------- photos: add entries here, e.g. {src:"photos/archana1.jpg", caption:"Archana"} ---------- */
 const PHOTOS=[
-  {src:"photos/little.jpg",  caption:"Tiny Archana, big glasses"},
-  {src:"photos/flower.jpg",  caption:"Flower power"},
-  {src:"photos/shades.jpg",  caption:"That smile!"},
-  {src:"photos/orange.jpg",  caption:"Rock on"}
+  {src:"photos/little.jpg",  caption:"Tiny Archana, big glasses", emoji:"🥹🤓"},
+  {src:"photos/flower.jpg",  caption:"Flower power", emoji:"🌸😊"},
+  {src:"photos/shades.jpg",  caption:"That smile!", emoji:"😁😎"},
+  {src:"photos/orange.jpg",  caption:"Rock on", emoji:"🤟😄"}
 ];
 (function(){
   if(!PHOTOS.length) return;
@@ -468,6 +469,7 @@ const PHOTOS=[
     const f=document.createElement("figure"); f.className="pol reveal"; f.style.setProperty("--r",(i%2?1.6:-1.6)+"deg");
     const im=new Image(); im.src=p.src; im.alt=p.caption||"Archana"; im.loading="lazy"; f.append(im);
     if(p.caption){ const c=document.createElement("figcaption"); c.textContent=p.caption; f.append(c); }
+    if(p.emoji){ const e=document.createElement("span"); e.className="em"; e.setAttribute("aria-hidden","true"); e.textContent=p.emoji; f.append(e); }
     g.append(f);
   });
   $("#gallery").hidden=false;
